@@ -1,0 +1,20 @@
+version: '3.7'
+
+x-shared_environment: &shared_environment
+  LOG_LEVEL: ${LOG_LEVEL:-debug}
+
+services:
+
+  alpine-routeros:
+    image: alpine-routeros:latest
+    container_name: alpine-routeros
+    restart: always
+    volumes:
+      - "./Private/data:/data"
+    build:
+      context: .
+    environment:
+      <<: *shared_environment
+      PASSWD: ${ALPINE_ROOT_PASSWORD}
+    ports:
+      - ${ALPINE_SSH_EXTERNAL_PORT}:${ALPINE_SSH_INTERNAL_PORT}

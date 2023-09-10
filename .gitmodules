@@ -1,0 +1,4 @@
+[submodule "Private"]
+	path = Private
+	url = ssh://git@github.com:igorleonovich/igorleonovich/router-satellite-routeros-private.git
+	branch = master
