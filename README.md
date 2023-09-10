@@ -1,4 +1,4 @@
-# Router Satellite Client (RouterOS)
+# Router Satellite Client (RouterOS) (Concept)
 
 - Compatibility
   - `RouterOS` v7.x
