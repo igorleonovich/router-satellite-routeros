@@ -19,4 +19,6 @@ set -e
 # echo "Starting ssh server..."
 # /usr/sbin/sshd -eD -f /sshd_config
 
-./aarch64-unknown-linux-gnu/router-satellite-swift
+./router-satellite-swift
+
+tail -f /dev/null
