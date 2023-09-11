@@ -11,8 +11,7 @@ services:
     restart: always
     build:
       context: .
-    environment:
-      <<: *shared_environment
-      PASSWD: ${ALPINE_ROOT_PASSWORD}
+    # environment:
+      # <<: *shared_environment
     ports:
       - ${UBUNTU_SSH_EXTERNAL_PORT}:${UBUNTU_SSH_INTERNAL_PORT}
