@@ -72,7 +72,7 @@ COPY --from=build --chown=app-runner:app-runner /staging /app
 USER app-runner:app-runner
 
 # Let Docker bind to port 8888
-EXPOSE 8888
+# EXPOSE 8888
 
 # Start the Vapor service when the image is run, default to listening on $APP_PORT in production environment
 ENTRYPOINT ["tail", "-f", "/dev/null"]

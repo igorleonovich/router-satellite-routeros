@@ -9,13 +9,10 @@ services:
     image: router-satellite-ubuntu:latest
     container_name: router-satellite-ubuntu
     restart: always
-    volumes:
-      - "./router-satellite-swift:/router-satellite-swift"
-      # - "./data:/data"
     build:
       context: .
     environment:
       <<: *shared_environment
       PASSWD: ${ALPINE_ROOT_PASSWORD}
     ports:
-      - ${ALPINE_SSH_EXTERNAL_PORT}:${ALPINE_SSH_INTERNAL_PORT}
+      - ${UBUNTU_SSH_EXTERNAL_PORT}:${UBUNTU_SSH_INTERNAL_PORT}
