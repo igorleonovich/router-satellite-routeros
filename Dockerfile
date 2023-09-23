@@ -7,7 +7,7 @@ RUN mkdir -p /root/.ssh && \
     echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && \
     echo "PasswordAuthentication no" >> /etc/ssh/sshd_config
 
-COPY ./key/key.pub /root/.ssh/authorized_keys
+COPY ./Private/key.pub /root/.ssh/authorized_keys
 RUN chmod 0600 /root/.ssh/authorized_keys
 
 ENTRYPOINT ["/usr/sbin/sshd", "-D", "-e"]
