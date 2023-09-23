@@ -5,13 +5,14 @@ x-shared_environment: &shared_environment
 
 services:
 
-  router-satellite-ubuntu:
-    image: router-satellite-ubuntu:latest
-    container_name: router-satellite-ubuntu
+  router-satellite-alpine:
+    image: router-satellite-alpine:latest
+    container_name: router-satellite-alpine
     restart: always
     build:
       context: .
-    # environment:
-      # <<: *shared_environment
+    environment:
+      <<: *shared_environment
+      SSH_INTERNAL_PORT: ${SSH_INTERNAL_PORT}
     ports:
-      - ${UBUNTU_SSH_EXTERNAL_PORT}:${UBUNTU_SSH_INTERNAL_PORT}
+      - ${SSH_EXTERNAL_PORT}:${SSH_INTERNAL_PORT}
