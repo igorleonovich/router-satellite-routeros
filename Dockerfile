@@ -11,6 +11,7 @@ RUN export $(grep -v '^#' /tmp/.env | xargs) && \
     ssh-keygen -A && \
     echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && \
     echo "PasswordAuthentication no" >> /etc/ssh/sshd_config && \
+    echo "Port $CONTAINER_INTERNAL_SSH_PORT" >> /etc/ssh/sshd_config && \
     ssh-keyscan -p $ROUTER_SSH_PORT $ROUTER_IP >> /root/.ssh/known_hosts
 
 COPY ./Private/key.pub /root/.ssh/authorized_keys
