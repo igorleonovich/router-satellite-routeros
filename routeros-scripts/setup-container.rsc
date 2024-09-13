@@ -22,18 +22,18 @@
 #/container/config/set registry-url=https://registry-1.docker.io tmpdir=usb1-part1/container_pull
 
 # Pull & add image
-/container/add file=usb1-part1/router-satellite-alpine-linux-arm32.tar interface=veth1 root-dir=usb1-part1/alpine_root envlist=alpine_envs hostname=alpine logging=yes start-on-boot=yes
+#/container/add file=usb1-part1/router-satellite-alpine-linux-arm32.tar interface=veth1 root-dir=usb1-part1/alpine_root envlist=alpine_envs hostname=alpine logging=yes start-on-boot=yes
 
 #/container/add remote-image=alpine:latest interface=veth1 root-dir=usb1-part1/alpine_root envlist=alpine_envs hostname=alpine logging=yes start-on-boot=yes
 
 # Print info
-/container/print
+#/container/print
 
 # Wait for extracting
-delay 8s
+#delay 8s
 
 # Start container
-/container/start 0
+#/container/start 0
 
 # Print info
-/container/print
+#/container/print

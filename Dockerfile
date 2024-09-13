@@ -14,10 +14,10 @@ RUN export $(grep -v '^#' /tmp/.env | xargs) && \
     echo "Port $CONTAINER_INTERNAL_SSH_PORT" >> /etc/ssh/sshd_config && \
     ssh-keyscan -p $ROUTER_SSH_PORT $ROUTER_IP >> /root/.ssh/known_hosts
 
-COPY ./Private/key.pub /root/.ssh/authorized_keys
+COPY ./Private/container-ssh-key.pub /root/.ssh/authorized_keys
 RUN chmod 0600 /root/.ssh/authorized_keys
 
-COPY ./Private/mkr /root/.ssh/${SSH_FILE_NAME}
+COPY ./Private/router-ssh-private-key /root/.ssh/${SSH_FILE_NAME}
 RUN chmod 0600 /root/.ssh/${SSH_FILE_NAME}
 
 COPY ./Private/config /root/.ssh/config
