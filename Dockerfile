@@ -17,7 +17,7 @@ RUN export $(grep -v '^#' /tmp/.env | xargs) && \
 COPY ./Private/container-ssh-key.pub /root/.ssh/authorized_keys
 RUN chmod 0600 /root/.ssh/authorized_keys
 
-COPY ./Private/router-ssh-private-key /root/.ssh/${SSH_FILE_NAME}
+COPY ./Private/router-ssh-key /root/.ssh/${SSH_FILE_NAME}
 RUN chmod 0600 /root/.ssh/${SSH_FILE_NAME}
 
 COPY ./Private/config /root/.ssh/config
