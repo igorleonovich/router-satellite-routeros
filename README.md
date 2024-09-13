@@ -15,3 +15,9 @@
   - Add all scripts from `routeros-scripts` into `Scripts` RouterOS menu
   - Run `register` script
   - Run `login` script
+
+- Todo
+  - Move parameters reading from _RouterOS Scripts_ into _Container_ and get this data via ssh to router directly instead of parsing files passed to volume
+
+- Notes
+  - There is a problem with sending magic packets from hosts under VPN. This solution helps to send magic packets from router to almost guarantee the delivery.

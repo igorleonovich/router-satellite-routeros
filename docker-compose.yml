@@ -2,17 +2,16 @@ version: '3.7'
 
 x-shared_environment: &shared_environment
   LOG_LEVEL: ${LOG_LEVEL:-debug}
-
+  
 services:
-
   router-satellite-alpine:
-    image: router-satellite-alpine:latest
-    container_name: router-satellite-alpine
-    restart: always
     build:
       context: .
+    env_file: "./Private/.env"
     environment:
-      <<: *shared_environment
-      SSH_INTERNAL_PORT: ${SSH_INTERNAL_PORT}
+      CONTAINER_INTERNAL_SSH_PORT: ${CONTAINER_INTERNAL_SSH_PORT}
+      ROUTER_IP: ${ROUTER_IP}
+      ROUTER_SSH_PORT: ${ROUTER_SSH_PORT}
+      SSH_FILE_NAME: ${SSH_FILE_NAME}
     ports:
-      - ${SSH_EXTERNAL_PORT}:${SSH_INTERNAL_PORT}
+      - ${CONTAINER_EXTERNAL_SSH_PORT}:${CONTAINER_INTERNAL_SSH_PORT}
