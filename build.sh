@@ -1,26 +1,36 @@
 #!/bin/bash
 
-# Load environment variables from .env file
-export $(grep -v '^#' Private/.env | xargs)
+run-nginx-static() {
+    nginx-static/up.sh
+    # nginx-static/reup.sh
+}
 
-docker_image_name="router-satellite-alpine-linux"
-docker_image_platform="arm32"
-container_file_path=./nginx-static/container/$docker_image_name-$docker_image_platform.tar
+build-container() {
+    # Load environment variables from .env file
+    export $(grep -v '^#' Private/.env | xargs)
 
-# Remove existing container file if it exists
-if [ -f $container_file_path ]; then
-    rm $container_file_path
-fi
+    docker_image_name="router-satellite-alpine-linux"
+    docker_image_platform="arm32"
+    container_file_path=./nginx-static/container/$docker_image_name-$docker_image_platform.tar
 
-mkdir -p ./nginx-static/container/
+    # Remove existing container file if it exists
+    # if [ -f $container_file_path ]; then
+    #     rm $container_file_path || true
+    # fi
 
-# Build the Docker image using the environment variables
-docker buildx build --platform linux/arm -t $docker_image_name:$docker_image_platform \
-    --build-arg CONTAINER_INTERNAL_SSH_PORT=${CONTAINER_INTERNAL_SSH_PORT} \
-    --build-arg CONTAINER_SSH_FILE_NAME=${ROUTER_SSH_FILE_NAME} \
-    --build-arg ROUTER_SSH_IP=${ROUTER_SSH_IP} \
-    --build-arg ROUTER_SSH_PORT=${ROUTER_SSH_PORT} \
-    --build-arg ROUTER_SSH_FILE_NAME=${ROUTER_SSH_FILE_NAME} .
+    mkdir -p ./nginx-static/container/
 
-# Save the Docker image to a file
-docker save $docker_image_name > $container_file_path
+    # Build the Docker image using the environment variables
+    docker buildx build --platform linux/arm -t $docker_image_name:$docker_image_platform \
+        --build-arg CONTAINER_INTERNAL_SSH_PORT=${CONTAINER_INTERNAL_SSH_PORT} \
+        --build-arg CONTAINER_SSH_FILE_NAME=${ROUTER_SSH_FILE_NAME} \
+        --build-arg ROUTER_SSH_IP=${ROUTER_SSH_IP} \
+        --build-arg ROUTER_SSH_PORT=${ROUTER_SSH_PORT} \
+        --build-arg ROUTER_SSH_FILE_NAME=${ROUTER_SSH_FILE_NAME} .
+
+    # Save the Docker image to a file
+    docker save $docker_image_name > $container_file_path
+}
+
+run-nginx-static
+build-container
